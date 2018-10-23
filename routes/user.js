@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose').set('debug', true);
 var userObject = require('../models/user.js');
-
+var dynamoService = require('../db/dynamoService.js')
 /* GET ALL */
 router.get('/', function(req, res, next) {
 
