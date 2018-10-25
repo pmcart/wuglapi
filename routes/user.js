@@ -5,35 +5,6 @@ var userObject = require('../models/user.js');
 var dynamoService = require('../db/dynamoService.js')
 
 
-router.get('/', function(req, res, next) {
-
-    var userID = req.query.userID;
-    if (userID) {
-        userObject.find({ id: userID }, function(err, users) {
-            if (err) return next(err);
-            if (users.length)
-                res.json('true');
-            else
-                res.json('false');
-            //res.status(200).send("OK");
-        });
-    } else {
-        userObject.find(function(err, users) {
-            //if (err) return next(err);
-            res.json(users);
-            //res.status(200).send("OK");
-        });
-    }
-
-});
-
-/* GET SINGLE BY ID */
-router.get('/:id', function(req, res, next) {
-    userObject.findById(req.params.id, function(err, user) {
-        //if (err) return next(err);
-        res.json(user);
-    });
-});
 
 router.post('/create', function(req, res, next) {
     console.log('users/create')
@@ -43,8 +14,8 @@ router.post('/create', function(req, res, next) {
             "id": req.data.id
         }
     };
-    dynamoService.createEntry()
-    res.send('Done')
+    //dynamoService.createEntry()
+    res.json(req.body);
 });
 
 router.post('/setlocation', function(req, res, next) {
