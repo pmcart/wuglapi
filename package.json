@@ -9,7 +9,7 @@
     "start": "node dist",
     "prestart": "npm run -s build",
     "test": "eslint src",
-    "dynamo" : "java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb"
+    "dynamo" : "java -Djava.library.path=./dynamo/DynamoDBLocal_lib -jar ./dynamo/DynamoDBLocal.jar -sharedDb & node ./db/local/create.js"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",

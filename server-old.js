@@ -12,28 +12,36 @@ var config = require('./config.json')
 //     .then(() => console.log('connection successful'))
 //     .catch((err) => console.error(err));
 
+var test = require('./routes/test');
+var location = require('./routes/location');
+var tag = require('./routes/tag');
 var user = require('./routes/user');
-
+var city = require('./routes/city');
 var app = express();
 app.server = http.createServer(app);
 
-app.use(cors())
- 
+// app.use(cors({
+// 	exposedHeaders: config.corsHeaders
+// }));
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     //res.header('Access-Control-Expose-Headers', 'Authorization');
-//     next();
-// });
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.header('Access-Control-Expose-Headers', 'Authorization');
+    next();
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ 'extended': 'false' }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
+app.use('/test', test);
+app.use('/location', location);
+app.use('/tag', tag);
 app.use('/user', user);
+app.use('/city', city);
 
 //app.use(middleware({ config, db }));
 

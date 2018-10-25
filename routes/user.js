@@ -3,7 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose').set('debug', true);
 var userObject = require('../models/user.js');
 var dynamoService = require('../db/dynamoService.js')
-/* GET ALL */
+
+
 router.get('/', function(req, res, next) {
 
     var userID = req.query.userID;
@@ -34,12 +35,16 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
-
 router.post('/create', function(req, res, next) {
-    userObject.create(req.body, function(err, post) {
-        if (err) return next(err);
-        res.json(post);
-    });
+    console.log('users/create')
+    var params = {
+        TableName: "Users",
+        Item: {
+            "id": req.data.id
+        }
+    };
+    dynamoService.createEntry()
+    res.send('Done')
 });
 
 router.post('/setlocation', function(req, res, next) {
