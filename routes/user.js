@@ -8,14 +8,12 @@ var dynamoService = require('../db/dynamoService.js')
 
 router.post('/create', function(req, res, next) {
     console.log('users/create')
-    var params = {
-        TableName: "Users",
-        Item: {
-            "id": req.data.id
-        }
-    };
-    //dynamoService.createEntry()
-    res.json(req.body);
+    
+    console.log('Calling createEntry')
+    dynamoService.createEntry(req).then( () =>
+        res.json('')
+    )
+   
 });
 
 router.post('/setlocation', function(req, res, next) {

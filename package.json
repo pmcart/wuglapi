@@ -9,7 +9,10 @@
     "start": "node dist",
     "prestart": "npm run -s build",
     "test": "eslint src",
-    "dynamo": "java -Djava.library.path=./dynamo/DynamoDBLocal_lib -jar ./dynamo/DynamoDBLocal.jar -sharedDb & node ./db/local/create.js"
+    "dynamo": "java -Djava.library.path=./dynamo/DynamoDBLocal_lib -jar ./dynamo/DynamoDBLocal.jar -sharedDb -port 8080",
+    "dynamocreate": "node ./db/local/create.js",
+    "dynamoui": "export DYNAMO_ENDPOINT=http://localhost:8080 && dynamodb-admin",
+    "launchDynamo": "npm run dynamo && npm run dynamocreate && npm run dynamoui"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
