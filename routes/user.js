@@ -7,13 +7,11 @@ var dynamoService = require('../db/dynamoService.js')
 
 
 router.post('/create', function(req, res, next) {
-    console.log('users/create')
-    
-    console.log('Calling createEntry')
-    dynamoService.createEntry(req).then( () =>
-        res.json('')
-    )
-   
+    dynamoService.createEntry('Users', req.body).then((message) =>
+        res.send(message)
+    ).catch((error) => {
+        console.log('Did not work', error)
+    });
 });
 
 router.post('/setlocation', function(req, res, next) {
