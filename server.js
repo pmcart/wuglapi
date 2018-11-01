@@ -7,6 +7,13 @@ var cors = require('cors')
 var http = require('http')
 var config = require('./config.json')
     // mongoose.Promise = global.Promise;
+var dynamoose = require('dynamoose')
+dynamoose.AWS.config.update({
+    accessKeyId: 'AKID',
+    secretAccessKey: 'SECRET',
+    region: 'eu-west-1'
+});
+dynamoose.local("http://localhost:8080")
 
 // mongoose.connect('mongodb://localhost/mean-app')
 //     .then(() => console.log('connection successful'))

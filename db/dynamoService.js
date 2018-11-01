@@ -9,7 +9,7 @@ AWS.config.update({
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 DynamoService.createEntry = function(params) {
-  
+
     return new Promise((resolve, reject) => {
         console.log('Returning Promise')
         docClient.put(params, function(err, data) {

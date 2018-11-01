@@ -1,14 +1,13 @@
-var mongoose = require('mongoose');
+var dynamoose = require('dynamoose');
 
-var UserSchema = new mongoose.Schema({
-    id: String,
-    imgURL: String,
-    userName: String,
+var User = dynamoose.model('Users', {
+    userid: String,
+    imgurl: String,
+    username: String,
     gender: String,
-    lastTagDate: String,
-    citySelected: String,
-    regionSelected: String,
-    countrySelected: String
-}, { collection: 'UserObject' });
-UserSchema.index({ pkey: 1 }, { unique: true });
-module.exports = mongoose.model('UserObject', UserSchema, 'UserObject');
+    lasttagdate: String,
+    cityselected: String,
+    regionselected: String,
+    countryselected: String
+});
+module.exports = User
