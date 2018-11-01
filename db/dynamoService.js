@@ -1,8 +1,6 @@
 var AWS = require("aws-sdk");
 var fs = require('fs');
 var DynamoService = {}
-const uuidv4 = require('uuid/v4');
-
 
 AWS.config.update({
     region: "eu-west-1",
@@ -10,16 +8,8 @@ AWS.config.update({
 });
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-DynamoService.createEntry = function(tableName, body) {
-    console.log('In Create Entry')
-    console.log(body.user.username)
-    var params = {
-        TableName: tableName,
-        Item: {
-            "userid": uuidv4(),
-            "username": body.user.username
-        }
-    }
+DynamoService.createEntry = function(params) {
+  
     return new Promise((resolve, reject) => {
         console.log('Returning Promise')
         docClient.put(params, function(err, data) {
