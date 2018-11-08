@@ -13,7 +13,7 @@
         "dynamocreate": "node ./db/local/create.js",
         "dynamoui": "export DYNAMO_ENDPOINT=http://localhost:8080 && dynamodb-admin",
         "launchDynamo": "npm run dynamo && npm run dynamocreate && npm run dynamoui",
-        "server": "nodemon server.js --ignore 'dynamo"
+        "server": "nodemon server.js"
     },
     "eslintConfig": {
         "extends": "eslint:recommended",

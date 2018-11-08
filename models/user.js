@@ -1,13 +1,45 @@
 var dynamoose = require('dynamoose');
+var Schema = dynamoose.Schema;
+var uuidv4 = require('uuid/v4');
 
-var User = dynamoose.model('Users', {
-    userid: String,
-    imgurl: String,
-    username: String,
-    gender: String,
-    lasttagdate: String,
-    cityselected: String,
-    regionselected: String,
-    countryselected: String
+var userSchema = new Schema({
+    userid: {
+        type: String,
+        default: uuidv4(),
+        //validate: function(v) { return v > 0; },
+        //hashKey: true
+    },
+    username: {
+        type: String,
+        //rangeKey: true,
+        //index: true // name: nameLocalIndex, ProjectionType: ALL
+    },
+    imgurl: {
+        type: String,
+        default: 'null',
+    },
+    gender: {
+        type: String,
+        default: 'Male',
+    },
+    lasttagdate: {
+        type: String,
+        default: 'null',
+    },
+    cityselected: {
+        type: String,
+        default: 'null',
+    },
+    regionselected: {
+        type: String,
+        default: 'null',
+    },
+    countryselected: {
+        type: String,
+        default: 'null',
+    },
+
 });
-module.exports = User
+
+var User = dynamoose.model('Users', userSchema)
+module.exports = User;

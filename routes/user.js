@@ -2,35 +2,23 @@ var express = require('express');
 var router = express.Router();
 var userObject = require('../models/user.js');
 var dynamoService = require('../db/dynamoService.js')
-const uuidv4 = require('uuid/v4');
+var uuidv4 = require('uuid/v4');
 
-var generateParams = function(req) {
-    var user = new userObject({ id: req.body.userSub, username: req.body.user.username });
-    console.log(req.body)
-    return new Promise(
-        function(resolve, reject) {
-            var params = {
-                TableName: 'Users',
-                Item: {
-                    "userid": req.body.userSub,
-                    "username": req.body.user.username
-                }
-            }
-            resolve(params)
-        }
-    )
+var createUser = function(req) {
+    return new Promise((resolve, reject) => {
+
+        var user = new userObject({
+            userid: req.body.userSub ? req.body.userSub : uuidv4(),
+            username: req.body.user.username
+        });
+        resolve(user); // fulfilled
+
+    });
 }
 
 router.post('/create', function(req, res, next) {
-    console.log('Calling user/create')
-
-    // generateParams(req).then( (params) => {
-    //     dynamoService.createEntry(params).then((message) =>
-    //     res.send(message)
-    //     ).catch((error) => {
-    //         console.log('Did not work', error)
-    //     });
-    // })
+    console.log('Calling user/create ****')
+    console.log('Creating user ****')
     var user = new userObject({
         userid: req.body.userSub,
         username: req.body.user.username
