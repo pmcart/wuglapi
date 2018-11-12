@@ -7,10 +7,11 @@ var userSchema = new Schema({
         type: String,
         default: uuidv4(),
         //validate: function(v) { return v > 0; },
-        //hashKey: true
+        hashKey: true
     },
     username: {
         type: String,
+        index: { global: true }
         //rangeKey: true,
         //index: true // name: nameLocalIndex, ProjectionType: ALL
     },
@@ -41,5 +42,5 @@ var userSchema = new Schema({
 
 });
 
-var User = dynamoose.model('Users', userSchema)
+var User = dynamoose.model('Users', userSchema, {update: true})
 module.exports = User;
