@@ -19,6 +19,12 @@ router.post('/create', function(req, res, next) {
 
 });
 
+router.post('/update/location', function(req, res, next) {
+    console.log('Calling user/update ****')
+    console.log('Updating user ****')
+    userObject.update( req.data.userid, { regionselected: req.data.regionselected, countryselected: req.data.countryselected})
+});
+
 router.get('/:username', function(req, res, next) {
     
       userObject.query("username").eq(req.params.username).exec((err, data) => {
