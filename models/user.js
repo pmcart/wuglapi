@@ -1,6 +1,7 @@
 var dynamoose = require('dynamoose');
 var Schema = dynamoose.Schema;
 var uuidv4 = require('uuid/v4');
+var LocationObject = require('./location')
 
 var userSchema = new Schema({
     userid: {
@@ -24,6 +25,10 @@ var userSchema = new Schema({
         default: 'Male',
     },
     lasttagdate: {
+        type: String,
+        default: 'null',
+    },
+    locationid:{
         type: String,
         default: 'null',
     },

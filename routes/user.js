@@ -19,10 +19,16 @@ router.post('/create', function(req, res, next) {
 
 });
 
-router.post('/update/location', function(req, res, next) {
+router.post('/:userid/location', function(req, res, next) {
     console.log('Calling user/update ****')
     console.log('Updating user ****')
-    userObject.update( req.data.userid, { regionselected: req.data.regionselected, countryselected: req.data.countryselected})
+    userObject.update( req.params.userid, { locationid:req.body.locationid, cityselected:req.body.city, 
+        regionselected: req.body.regionID, countryselected: req.body.countryID}).then( data => {
+            res.send(200, data)
+        }).catch(err => {
+            res.send(err)
+        })
+    
 });
 
 router.get('/:username', function(req, res, next) {
@@ -34,13 +40,31 @@ router.get('/:username', function(req, res, next) {
         }
         
         if(data.count > 0){
-            res.json(200, 'Success')
+            res.json(200, data)
         }
         else{
             res.json(404, 'Error')
         }
        
         });
+});
+
+router.get('/:username/location', function(req, res, next) {
+    
+    userObject.query("username").eq(req.params.username).exec((err, data) => {
+      if(err) {
+          res.send('User does not exist')
+          return console.log(err); 
+      }
+      
+      if(data.count > 0){
+          res.json(200, data)
+      }
+      else{
+          res.json(404, 'Error')
+      }
+     
+      });
 });
 
 
