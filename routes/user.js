@@ -23,7 +23,7 @@ router.post('/:userid/location', function(req, res, next) {
     console.log('Calling user/update ****')
     console.log('Updating user ****')
     userObject.update( req.params.userid, { locationid:req.body.locationid, cityselected:req.body.city, 
-        regionselected: req.body.regionID, countryselected: req.body.countryID}).then( data => {
+        regionselected: req.body.regionid, countryselected: req.body.countryid}).then( data => {
             res.send(200, data)
         }).catch(err => {
             res.send(err)

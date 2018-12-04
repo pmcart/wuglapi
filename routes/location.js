@@ -8,8 +8,8 @@ var uuidv4 = require('uuid/v4');
 router.get('/cities', function(req, res, next) {
     locationObject.scan().exec((err, data) => {
         if(err) {
-            res.send('User does not exist')
-            return console.log(err); 
+            res.send(err)
+            //return console.log(err); 
         }
         
         if(data){

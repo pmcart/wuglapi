@@ -27,11 +27,11 @@ var locationSchema = new Schema({
         type: String,
         default: 'null',
     },
-    countryID: {
+    countryid: {
         type: String,
         default: 'null',
     },
-    regionID: {
+    regionid: {
         type: String,
         default: 'null',
     }

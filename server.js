@@ -21,6 +21,7 @@ dynamoose.local("http://localhost:8080")
 
 var user = require('./routes/user');
 var location = require('./routes/location');
+var business = require('./routes/business');
 
 var app = express();
 app.server = http.createServer(app);
@@ -48,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 //app.use('/api', api({ config, db }));
 app.use('/users', user);
 app.use('/locations', location);
+app.use('/business', business);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
